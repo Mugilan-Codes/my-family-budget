@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 
-const { port } = require('./config');
-
-// Necessary if there is no .env file
-const PORT = port || 5000;
+// Dotenv files
+const { PORT } = require('./config');
 
 app.get('/', (req, res) => {
   res.send('API Running...');
