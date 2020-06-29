@@ -22,3 +22,11 @@ Keep track of all family budget
 > Dev Dependency
 
 - [nodemon](https://www.npmjs.com/package/nodemon)
+
+## Resources
+
+- [Node-Postgres](https://node-postgres.com/)
+- [Building RESTful Api With Node.js, Express.Js And PostgreSQL the Right way](https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66)
+- [Building a full stack MongoDB/PostgreSQL, Express, React, Node (MERN/PERN) app with CI/CD pipeline using Docker, Docker-Compose, Kubernetes, Helm, Google Cloud Platform (GCP) and Gitlab CI/CD Part 1](https://medium.com/@j.jameslee02102/building-a-full-stack-mongodb-postgresql-express-react-node-mern-pern-app-with-ci-cd-pipeline-5cb3d0a733e8)
+- [Setting up a RESTful API with Node.js and PostgreSQL](https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/)
+- [PostgreSQL Schema Management Basics](https://severalnines.com/blog/postgresql-schema-management-basics)
