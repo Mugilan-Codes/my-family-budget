@@ -19,6 +19,7 @@ Keep track of all family budget
 - [express](https://www.npmjs.com/package/express)
 - [pg](https://www.npmjs.com/package/pg)
 - [sql-template-tag](https://www.npmjs.com/package/sql-template-tag)
+- [cors](https://www.npmjs.com/package/cors)
 
 > Dev Dependency
 
