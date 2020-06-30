@@ -35,3 +35,5 @@ Keep track of all family budget
 - [Building a full stack MongoDB/PostgreSQL, Express, React, Node (MERN/PERN) app with CI/CD pipeline using Docker, Docker-Compose, Kubernetes, Helm, Google Cloud Platform (GCP) and Gitlab CI/CD Part 1](https://medium.com/@j.jameslee02102/building-a-full-stack-mongodb-postgresql-express-react-node-mern-pern-app-with-ci-cd-pipeline-5cb3d0a733e8)
 - [Setting up a RESTful API with Node.js and PostgreSQL](https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/)
 - [PostgreSQL Schema Management Basics](https://severalnines.com/blog/postgresql-schema-management-basics)
+- [How To Set Up An Express API Backend Project With PostgreSQL](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/)
+- [Bulletproof node.js project architecture ](https://softwareontheroad.com/ideal-nodejs-project-structure/)

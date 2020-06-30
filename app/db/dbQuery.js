@@ -5,6 +5,6 @@ export const query = async (quertText, params) => {
     const res = await pool.query(quertText, params);
     return res;
   } catch (err) {
-    console.error(err.message);
+    return err;
   }
 };
