@@ -1,8 +1,9 @@
-const express = require('express');
-const app = express();
+import express from 'express';
 
 // Dotenv files
-const { port } = require('./env');
+import { port } from './env';
+
+const app = express();
 
 app.get('/', (req, res) => {
   res.send('API Running...');

@@ -1,8 +1,7 @@
-const { Pool } = require('pg');
+import { Pool } from 'pg';
 
-const { db_url } = require('../../env');
+import { db_url } from '../../env';
 
 const databaseConfig = { connectionString: db_url };
-const pool = new Pool(databaseConfig);
 
-module.exports = pool;
+export const pool = new Pool(databaseConfig);

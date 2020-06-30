@@ -1,12 +1,6 @@
-const pool = require('./pool');
+import { pool } from './pool';
 
-/**
- * DB Query
- * @param {object} req
- * @param {object} res
- * @returns {object} object
- */
-const query = async (quertText, params) => {
+export const query = async (quertText, params) => {
   try {
     const res = await pool.query(quertText, params);
     return res;
@@ -14,5 +8,3 @@ const query = async (quertText, params) => {
     console.error(err.message);
   }
 };
-
-module.exports = query;
