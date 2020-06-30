@@ -23,6 +23,9 @@ Keep track of all family budget
 > Dev Dependency
 
 - [nodemon](https://www.npmjs.com/package/nodemon)
+- [@babel/core](https://www.npmjs.com/package/@babel/core)
+- [@babel/node](https://www.npmjs.com/package/@babel/node)
+- [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env)
 
 ## Resources
 
