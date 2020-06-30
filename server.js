@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 
-import { port } from './env';
-
 const app = express();
+
+import { port } from './env';
 
 app.use(cors());
 
