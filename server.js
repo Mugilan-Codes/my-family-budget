@@ -4,9 +4,9 @@ import cors from 'cors';
 const app = express();
 
 import { port } from './env';
-import { createDevTables } from './db';
+import { createAllTables } from './db';
 
-createDevTables();
+createAllTables();
 
 app.use(cors());
 
