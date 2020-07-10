@@ -7,6 +7,8 @@ import { port } from './env';
 import mountRoutes from './routes';
 
 app.use(cors());
+app.use(express.json({ extended: false }));
+
 mountRoutes(app);
 
 app.get('/', (req, res) => {

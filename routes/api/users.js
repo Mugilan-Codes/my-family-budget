@@ -1,7 +1,13 @@
 import express from 'express';
 const router = express.Router();
 
-router.get('/', (req, res) => {
+/**
+ * @route   POST api/users
+ * @desc    Register User
+ * @access  Public
+ */
+router.post('/', (req, res) => {
+  console.log(req.body);
   res.send('Users Route');
 });
 
