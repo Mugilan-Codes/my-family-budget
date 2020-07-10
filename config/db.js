@@ -1,6 +1,5 @@
 import { pool } from './pool';
-import { db_name } from './env';
-import sqltag from 'sql-template-tag';
+import { db_name } from '../env';
 
 pool.on('connect', () => {
   console.log(`Connected to ${db_name} DB`);
