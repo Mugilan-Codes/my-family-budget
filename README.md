@@ -6,7 +6,6 @@ Keep track of all family budget
 
 1. Complete Backend
    1. setup database - postgres
-   1. Dynamically create database
    1. create schema
    1. create routes
 1. Complete Frontend (React/Vue or React Native)
@@ -27,6 +26,40 @@ Keep track of all family budget
 - [@babel/core](https://www.npmjs.com/package/@babel/core)
 - [@babel/node](https://www.npmjs.com/package/@babel/node)
 - [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env)
+- [make-runnable](https://www.npmjs.com/package/make-runnable)
+- [npm-run-all](https://www.npmjs.com/package/npm-run-all)
+
+## Scripts Explanation
+
+- Creates all the tables
+
+```zsh
+   npm run create-dev-tables
+```
+
+- Drops all the tables
+
+```zsh
+   npm run drop-dev-tables
+```
+
+- Creates all tables and Starts the server Parallelly
+
+```zsh
+   npm run setup
+```
+
+- First Drops All Tables and then Creates All the Tables
+
+```zsh
+   npm run setup:recreate
+```
+
+- Starts the server with nodemon
+
+```zsh
+   npm start
+```
 
 ## Resources
 
