@@ -27,6 +27,7 @@ Keep track of all family budget
 - [cors](https://www.npmjs.com/package/cors)
 - [express-validator](https://www.npmjs.com/package/express-validator)
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
 > Dev Dependency
 
