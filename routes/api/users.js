@@ -1,4 +1,8 @@
 import express from 'express';
+import { check } from 'express-validator';
+
+import { validate } from '../../middleware/validator';
+
 const router = express.Router();
 
 /**
@@ -6,9 +10,18 @@ const router = express.Router();
  * @desc    Register User
  * @access  Public
  */
-router.post('/', (req, res) => {
-  console.log(req.body);
-  res.send('Users Route');
-});
+router.post(
+  '/',
+  validate([
+    check('name', 'Name is required').notEmpty(),
+    check('email', 'Please include email').isEmail(),
+    check('password', 'Please include password').isLength({ min: 6 }),
+  ]),
+  (req, res) => {
+    console.log(req.body);
+
+    res.send('Users Route');
+  }
+);
 
 export default router;
