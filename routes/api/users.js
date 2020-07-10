@@ -1,6 +1,6 @@
 import express from 'express';
 import { check } from 'express-validator';
-import bcrypt, { genSalt } from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 import { validate } from '../../middleware/validator';
 
@@ -27,15 +27,14 @@ router.post(
     const { name, email, password, username } = req.body;
 
     try {
-      console.log(
-        name,
-        email,
-        password,
-        typeof username === 'undefined' ? '' : username
-      );
+      const userName = typeof username === 'undefined' ? '' : username;
+      // Check if the user already exists using email or username
+
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      return res.send({ name, email, password, hashedPassword, username });
+      // Return JSONWebToken
+
+      return res.send({ name, email, hashedPassword, userName });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
