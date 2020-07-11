@@ -29,7 +29,8 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.2.1",
-    "sql-template-tag": "^3.4.0"
+    "sql-template-tag": "^3.4.0",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",

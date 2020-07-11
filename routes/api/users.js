@@ -1,8 +1,11 @@
 import express from 'express';
 import { check } from 'express-validator';
 import bcrypt from 'bcrypt';
+import sqltag from 'sql-template-tag';
+import { v4 as uuidv4 } from 'uuid';
 
 import { validate } from '../../middleware/validator';
+import { pool } from '../../config/pool';
 
 const router = express.Router();
 
@@ -32,11 +35,32 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      const id = uuidv4();
+      const c_on = new Date();
+      const u_on = new Date();
+
       // Save user and return id
+      const result = await pool.query(
+        sqltag`INSERT INTO users (
+          id,
+          name,
+          email,
+          password,
+          created_on,
+          updated_on
+        ) VALUES (
+          ${id},
+          ${name},
+          ${email},
+          ${hashedPassword},
+          ${c_on},
+          ${u_on}
+        ) RETURNING *`
+      );
 
       // Return JSONWebToken
 
-      return res.send({ name, email, hashedPassword, userName });
+      return res.json(result.rows[0]);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
