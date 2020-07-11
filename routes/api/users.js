@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import { validate } from '../../middleware/validator';
 import { pool } from '../../config/pool';
 import { jwt_secret } from '../../env';
+import { findByEmail, findByUserame } from '../../helper/queries';
 
 const router = express.Router();
 
@@ -33,9 +34,7 @@ router.post(
 
     try {
       // Checks if the user exists (email)
-      let user = (
-        await pool.query(sqltag`SELECT * FROM users where email = ${email}`)
-      ).rows[0];
+      let user = await findByEmail(email);
       if (user) {
         return res.status(400).json({ errors: [{ msg: 'User Exists' }] });
       }
@@ -45,11 +44,7 @@ router.post(
         typeof username === 'undefined' || username === '' ? null : username;
 
       // Checks if the user exists (username)
-      user = (
-        await pool.query(
-          sqltag`SELECT * FROM users where username = ${userName}`
-        )
-      ).rows[0];
+      user = await findByUserame(userName);
       if (user) {
         return res.status(400).json({ errors: [{ msg: 'Username Exists' }] });
       }
