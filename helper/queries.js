@@ -22,7 +22,7 @@ const findByEmail = async (email) => {
   return user;
 };
 
-const findByUserame = async (username) => {
+const findByUsername = async (username) => {
   const user = (
     await pool.query(
       sqltag`SELECT id, name, email, username, created_on, updated_on FROM users WHERE username = ${username}`
@@ -32,4 +32,4 @@ const findByUserame = async (username) => {
   return user;
 };
 
-export { findById, findByEmail, findByUserame };
+export { findById, findByEmail, findByUsername };
