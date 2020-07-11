@@ -19,7 +19,7 @@ const router = express.Router();
  * @param {string} name       Name of the user.
  * @param {string} email      Email of the user.
  * @param {string} password   Password for the user.
- * @param {string} [username=''] Username of the user(Optional).
+ * @param {string} [username] Username of the user(Optional).
  */
 router.post(
   '/',
@@ -64,22 +64,22 @@ router.post(
       user = (
         await pool.query(
           sqltag`INSERT INTO users (
-          id,
-          name,
-          email,
-          password,
-          username,
-          created_on,
-          updated_on
-        ) VALUES (
-          ${id},
-          ${name},
-          ${email},
-          ${hashedPassword},
-          ${userName},
-          ${c_on},
-          ${u_on}
-        ) RETURNING id`
+            id,
+            name,
+            email,
+            password,
+            username,
+            created_on,
+            updated_on
+          ) VALUES (
+            ${id},
+            ${name},
+            ${email},
+            ${hashedPassword},
+            ${userName},
+            ${c_on},
+            ${u_on}
+          ) RETURNING id`
         )
       ).rows[0];
 
