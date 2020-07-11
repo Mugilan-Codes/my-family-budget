@@ -3,9 +3,11 @@ import { check } from 'express-validator';
 import bcrypt from 'bcrypt';
 import sqltag from 'sql-template-tag';
 import { v4 as uuidv4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 
 import { validate } from '../../middleware/validator';
 import { pool } from '../../config/pool';
+import { jwt_secret } from '../../env';
 
 const router = express.Router();
 
@@ -30,6 +32,7 @@ router.post(
     const { name, email, password, username } = req.body;
 
     try {
+      // Checks if the user exists (email)
       let user = (
         await pool.query(sqltag`SELECT * FROM users where email = ${email}`)
       ).rows[0];
@@ -37,9 +40,11 @@ router.post(
         return res.status(400).json({ errors: [{ msg: 'User Exists' }] });
       }
 
+      // converts username to null if empty or undefined
       const userName =
         typeof username === 'undefined' || username === '' ? null : username;
 
+      // Checks if the user exists (username)
       user = (
         await pool.query(
           sqltag`SELECT * FROM users where username = ${userName}`
@@ -78,17 +83,20 @@ router.post(
         )
       ).rows[0];
 
-      const result = user.id;
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
 
-      // Return JSONWebToken
-
-      return res.json(result);
+      jwt.sign(payload, jwt_secret, { expiresIn: '3d' }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
     }
-
-    res.send('Users Route');
   }
 );
 
