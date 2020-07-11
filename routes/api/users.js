@@ -30,8 +30,24 @@ router.post(
     const { name, email, password, username } = req.body;
 
     try {
-      const userName = typeof username === 'undefined' ? '' : username;
-      // Check if the user already exists using email or username
+      let user = (
+        await pool.query(sqltag`SELECT * FROM users where email = ${email}`)
+      ).rows[0];
+      if (user) {
+        return res.status(400).json({ errors: [{ msg: 'User Exists' }] });
+      }
+
+      const userName =
+        typeof username === 'undefined' || username === '' ? null : username;
+
+      user = (
+        await pool.query(
+          sqltag`SELECT * FROM users where username = ${userName}`
+        )
+      ).rows[0];
+      if (user) {
+        return res.status(400).json({ errors: [{ msg: 'Username Exists' }] });
+      }
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -40,13 +56,14 @@ router.post(
       const u_on = new Date();
 
       // Save user and return id
-      const user = (
+      user = (
         await pool.query(
           sqltag`INSERT INTO users (
           id,
           name,
           email,
           password,
+          username,
           created_on,
           updated_on
         ) VALUES (
@@ -54,6 +71,7 @@ router.post(
           ${name},
           ${email},
           ${hashedPassword},
+          ${userName},
           ${c_on},
           ${u_on}
         ) RETURNING id`
