@@ -40,8 +40,9 @@ router.post(
       const u_on = new Date();
 
       // Save user and return id
-      const result = await pool.query(
-        sqltag`INSERT INTO users (
+      const user = (
+        await pool.query(
+          sqltag`INSERT INTO users (
           id,
           name,
           email,
@@ -55,12 +56,15 @@ router.post(
           ${hashedPassword},
           ${c_on},
           ${u_on}
-        ) RETURNING *`
-      );
+        ) RETURNING id`
+        )
+      ).rows[0];
+
+      const result = user.id;
 
       // Return JSONWebToken
 
-      return res.json(result.rows[0]);
+      return res.json(result);
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');

@@ -29,6 +29,7 @@ Keep track of all family budget
 - [express-validator](https://www.npmjs.com/package/express-validator)
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [uuid](https://www.npmjs.com/package/uuid)
 
 > Dev Dependency
 
