@@ -32,6 +32,8 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
+      // Save user and return id
+
       // Return JSONWebToken
 
       return res.send({ name, email, hashedPassword, userName });
