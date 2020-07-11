@@ -4,6 +4,7 @@ Keep track of all family budget
 
 ## TODO:
 
+1. Use config and dotenv together to provide fallbacks and understanding
 1. Complete Backend
    1. setup database - postgres
    1. create schema
