@@ -1,11 +1,14 @@
 import jwt from 'jsonwebtoken';
 
 import { jwt_secret } from '../env';
+import { status } from '../helper/status';
 
 const auth = (req, res, next) => {
   const token = req.header('x-auth-token');
   if (!token) {
-    return res.status(401).json({ msg: 'No Token, Authorization Denied' });
+    return res
+      .status(status.unauthorized)
+      .json({ msg: 'No Token, Authorization Denied' });
   }
 
   try {
@@ -16,7 +19,7 @@ const auth = (req, res, next) => {
     next();
   } catch (err) {
     console.error(err.message);
-    res.status(401).json({ msg: 'Token is Invalid' });
+    res.status(status.unauthorized).json({ msg: 'Token is Invalid' });
   }
 };
 

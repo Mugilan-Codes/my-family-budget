@@ -7,6 +7,7 @@ import { auth } from '../../middleware/auth';
 import { findOne } from '../../helper/queries';
 import { validate } from '../../middleware/validator';
 import { jwt_secret } from '../../env';
+import { status } from '../../helper/status';
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/', auth, async (req, res) => {
     res.json({ user, req: { user } });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(status.error).send('Server Error');
   }
 });
 
@@ -49,7 +50,7 @@ router.post(
 
       if (!user) {
         return res
-          .status(400)
+          .status(status.bad)
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
@@ -57,7 +58,7 @@ router.post(
 
       if (!isMatch) {
         return res
-          .status(400)
+          .status(status.bad)
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
@@ -73,7 +74,7 @@ router.post(
       });
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server Error');
+      res.status(status.error).send('Server Error');
     }
   }
 );

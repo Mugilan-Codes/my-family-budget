@@ -9,7 +9,7 @@ import { validate } from '../../middleware/validator';
 import { pool } from '../../config/pool';
 import { jwt_secret } from '../../env';
 import { findOne } from '../../helper/queries';
-import { auth } from '../../middleware/auth';
+import { status } from '../../helper/status';
 
 const router = express.Router();
 
@@ -37,7 +37,9 @@ router.post(
       // Checks if the user exists (email)
       let user = await findOne({ email });
       if (user) {
-        return res.status(400).json({ errors: [{ msg: 'User Exists' }] });
+        return res
+          .status(status.conflict)
+          .json({ errors: [{ msg: 'User Exists' }] });
       }
 
       // converts username to null if empty or undefined
@@ -47,7 +49,9 @@ router.post(
       // Checks if the user exists (username)
       user = await findOne({ username: userName });
       if (user) {
-        return res.status(400).json({ errors: [{ msg: 'Username Exists' }] });
+        return res
+          .status(status.conflict)
+          .json({ errors: [{ msg: 'Username Exists' }] });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -91,7 +95,7 @@ router.post(
       });
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server Error');
+      res.status(status.error).send('Server Error');
     }
   }
 );
