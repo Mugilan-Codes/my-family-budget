@@ -9,6 +9,7 @@ import { validate } from '../../middleware/validator';
 import { pool } from '../../config/pool';
 import { jwt_secret } from '../../env';
 import { findOne } from '../../helper/queries';
+import { auth } from '../../middleware/auth';
 
 const router = express.Router();
 
@@ -94,5 +95,9 @@ router.post(
     }
   }
 );
+
+// todo - Update User
+
+// todo - Delete User
 
 export default router;
