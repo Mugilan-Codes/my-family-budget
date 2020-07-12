@@ -10,11 +10,16 @@ import { jwt_secret } from '../../env';
 
 const router = express.Router();
 
+/**
+ * @route          GET api/auth
+ * @desc           Test Auth User
+ * @access         Private
+ */
 router.get('/', auth, async (req, res) => {
   try {
     const user = await findOne({ id: req.user.id });
 
-    res.json(user);
+    res.json({ user, req: { user } });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
