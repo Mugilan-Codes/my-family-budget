@@ -20,6 +20,12 @@ router.get('/', auth, async (req, res) => {
   try {
     const user = await findOne({ id: req.user.id });
 
+    if (!user) {
+      return res
+        .status(status.notfound)
+        .json({ errors: [{ msg: 'User Not Found' }] });
+    }
+
     res.json({ user, req: { user } });
   } catch (err) {
     console.error(err.message);
