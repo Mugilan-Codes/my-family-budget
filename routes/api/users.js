@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import { validate } from '../../middleware/validator';
 import { pool } from '../../config/pool';
 import { jwt_secret } from '../../env';
-import { findByEmail, findByUsername } from '../../helper/queries';
+import { findOne } from '../../helper/queries';
 
 const router = express.Router();
 
@@ -34,7 +34,7 @@ router.post(
 
     try {
       // Checks if the user exists (email)
-      let user = await findByEmail(email);
+      let user = await findOne({ email });
       if (user) {
         return res.status(400).json({ errors: [{ msg: 'User Exists' }] });
       }
@@ -44,7 +44,7 @@ router.post(
         typeof username === 'undefined' || username === '' ? null : username;
 
       // Checks if the user exists (username)
-      user = await findByUsername(userName);
+      user = await findOne({ username: userName });
       if (user) {
         return res.status(400).json({ errors: [{ msg: 'Username Exists' }] });
       }

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import { auth } from '../../middleware/auth';
-import { findById, findByEmail } from '../../helper/queries';
+import { findOne } from '../../helper/queries';
 import { validate } from '../../middleware/validator';
 import { jwt_secret } from '../../env';
 
@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/', auth, async (req, res) => {
   try {
-    const user = await findById(req.user.id);
+    const user = await findOne({ id: req.user.id });
 
     res.json(user);
   } catch (err) {
@@ -40,14 +40,13 @@ router.post(
 
     try {
       // todo - Get username as alternative for email
-      let user = await findByEmail(email, true);
+      let user = await findOne({ email }, true);
+
       if (!user) {
         return res
           .status(400)
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
-
-      console.log(password, user.password);
 
       const isMatch = await bcrypt.compare(password, user.password);
 
