@@ -7,6 +7,7 @@ const status = {
   forbidden: 403,
   notfound: 404,
   conflict: 409,
+  unprocessable: 422,
   error: 500,
 };
 

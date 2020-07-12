@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator';
+import { status } from '../helper/status';
 
 const validate = (validations) => {
   return async (req, res, next) => {
@@ -9,7 +10,7 @@ const validate = (validations) => {
       return next();
     }
 
-    res.status(422).json({ errors: errors.array() });
+    res.status(status.bad).json({ errors: errors.array() });
   };
 };
 

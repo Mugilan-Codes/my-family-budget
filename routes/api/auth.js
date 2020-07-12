@@ -50,7 +50,7 @@ router.post(
 
       if (!user) {
         return res
-          .status(status.bad)
+          .status(status.unprocessable)
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
@@ -58,7 +58,7 @@ router.post(
 
       if (!isMatch) {
         return res
-          .status(status.bad)
+          .status(status.unprocessable)
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
 
