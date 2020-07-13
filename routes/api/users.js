@@ -102,6 +102,25 @@ router.post(
 );
 
 // todo - Update User
+/**
+ * @route          PUT api/users
+ * @desc           Update User
+ * @access         Private
+ ** Request Body
+ * @param {string} [name]       Name of the user.
+ * @param {string} [email]      Email of the user.
+ * @param {string} [password]   Password for the user.
+ * @param {string} [username]   Username of the user.
+ */
+router.put('/', auth, async (req, res) => {
+  const { name, email, password, username } = req.body;
+  try {
+    res.json({ name, email, password, username });
+  } catch (err) {
+    console.error(err.message);
+    res.status(status.error).send('Server Error');
+  }
+});
 
 //? IS THIS NECESSARY?
 /**
