@@ -10,6 +10,7 @@ import { pool } from '../../config/pool';
 import { jwt_secret } from '../../env';
 import { findOne } from '../../helper/queries';
 import { status } from '../../helper/status';
+import { auth } from '../../middleware/auth';
 
 const router = express.Router();
 
@@ -102,6 +103,21 @@ router.post(
 
 // todo - Update User
 
-// todo - Delete User
+//? IS THIS NECESSARY?
+/**
+ * @route          DELETE api/users
+ * @desc           Delete User
+ * @access         Private
+ */
+router.delete('/', auth, async (req, res) => {
+  try {
+    await pool.query(sqltag`DELETE FROM users WHERE id = ${req.user.id}`);
+
+    return res.json('User Deleted');
+  } catch (err) {
+    console.error(err.message);
+    res.status(status.error).send('Server Error');
+  }
+});
 
 export default router;
