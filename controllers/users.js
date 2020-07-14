@@ -1,11 +1,7 @@
-import bcrypt from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid';
-import sqltag from 'sql-template-tag';
 import jwt from 'jsonwebtoken';
 
 import { findOne } from '../helper/queries';
 import { status } from '../helper/status';
-import { pool } from '../config/pool';
 import { jwt_secret } from '../env';
 import { addUser } from '../services/users';
 
@@ -33,21 +29,12 @@ const registerUser = async (req, res, next) => {
         .json({ errors: [{ msg: 'Username Exists' }] });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const id = uuidv4();
-    const c_on = new Date();
-    const u_on = new Date();
-
     // Save user and return id
     user = await addUser({
-      id,
       name,
       email,
       userName,
-      hashedPassword,
-      c_on,
-      u_on,
+      password,
     });
 
     const payload = {
