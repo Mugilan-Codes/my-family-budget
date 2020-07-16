@@ -1,4 +1,5 @@
 import { addUser } from '../services/users';
+import { generateAccessToken } from '../utils/token';
 
 const registerUser = async (req, res) => {
   const { name, email, password, username } = req.body;
@@ -9,9 +10,13 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ errors: [{ msg: user.err_msg }] });
     }
 
-    // return json web token
+    const payload = {
+      user: { id: user.id },
+    };
 
-    res.json(user);
+    const token = generateAccessToken(payload);
+
+    res.json({ token });
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Sever Error');
