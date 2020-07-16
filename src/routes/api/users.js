@@ -1,13 +1,8 @@
 import express from 'express';
+import { registerUser } from '../../controllers/users';
 
 const router = express.Router();
 
-router
-  .get('/test1', (req, res) => {
-    res.send('Test 1 GET');
-  })
-  .get('/test2', (req, res) => {
-    res.send('Test 2 GET');
-  });
+router.post('/', registerUser);
 
 export default router;

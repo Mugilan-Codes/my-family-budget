@@ -12,7 +12,7 @@ const pool = new Pool({
 
 //! Not Working
 export default {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback);
+  query: async (text, params) => {
+    return await pool.query(text, params);
   },
 };
