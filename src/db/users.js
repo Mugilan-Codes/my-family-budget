@@ -27,4 +27,20 @@ const addUserToDb = async ({
   return result;
 };
 
-export { addUserToDb };
+const findOne = async ({ email, username } = {}) => {
+  let user;
+
+  if (email) {
+    user = (await db.query('SELECT * FROM users WHERE email = $1', [email]))
+      .rows[0];
+  }
+  if (username) {
+    user = (
+      await db.query('SELECT * FROM users WHERE username = $1', [username])
+    ).rows[0];
+  }
+
+  return user;
+};
+
+export { addUserToDb, findOne };
