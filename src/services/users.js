@@ -40,9 +40,21 @@ const addUser = async ({ name, email, password, username }) => {
   }
 };
 
-const retrieveUser = async (id) => {
+const retrieveUser = async ({ id, email, username } = {}) => {
+  let user;
   try {
-    return await findById(id);
+    if (id) {
+      user = await findById(id);
+    } else {
+      user = await findOne({ email });
+      if (!user) {
+        user = await findOne({ username });
+        if (!user) {
+          return { err_msg: 'Invalid Credentials' };
+        }
+      }
+    }
+    return user;
   } catch (err) {
     console.log(err.message);
     return new Error(err);
