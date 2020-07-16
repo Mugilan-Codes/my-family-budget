@@ -9,8 +9,6 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ errors: [{ msg: user.err_msg }] });
     }
 
-    console.log({ user });
-
     res.json(user);
   } catch (err) {
     res.status(500).send('Sever Error');
