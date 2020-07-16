@@ -5,9 +5,11 @@ const app = express();
 
 import { port } from './src/config';
 import mountRoutes from './src/routes';
+import { Logger } from './src/middleware/logger';
 
 app.use(cors());
 app.use(express.json({ extended: false }));
+app.use(Logger);
 
 mountRoutes(app);
 
