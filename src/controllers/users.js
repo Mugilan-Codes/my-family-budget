@@ -7,7 +7,7 @@ const registerUser = async (req, res) => {
     const user = await addUser({ name, email, password, username });
 
     if (user.err_msg) {
-      return res.status(400).json({ errors: [{ msg: user.err_msg }] });
+      return res.status(409).json({ errors: [{ msg: user.err_msg }] });
     }
 
     const payload = {
