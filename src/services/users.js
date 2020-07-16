@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcrypt';
 
 import { addUserToDb, findOne, findById } from '../db/users';
+import { hashPassword } from '../utils/crypt';
 
 const addUser = async ({ name, email, password, username }) => {
   try {
@@ -21,7 +21,7 @@ const addUser = async ({ name, email, password, username }) => {
     const created_on = new Date();
     const updated_on = new Date();
 
-    password = await bcrypt.hash(password, 10);
+    password = await hashPassword(password);
 
     let newUser = {
       id,
