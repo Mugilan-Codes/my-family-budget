@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
-import { addUserToDb, findOne } from '../db/users';
+import { addUserToDb, findOne, findById } from '../db/users';
 
 const addUser = async ({ name, email, password, username }) => {
   try {
@@ -40,4 +40,13 @@ const addUser = async ({ name, email, password, username }) => {
   }
 };
 
-export { addUser };
+const retrieveUser = async (id) => {
+  try {
+    return await findById(id);
+  } catch (err) {
+    console.log(err.message);
+    return new Error(err);
+  }
+};
+
+export { addUser, retrieveUser };

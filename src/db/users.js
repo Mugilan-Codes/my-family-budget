@@ -43,4 +43,17 @@ const findOne = async ({ email, username } = {}) => {
   return user;
 };
 
-export { addUserToDb, findOne };
+const findById = async (id) => {
+  let user;
+
+  user = (
+    await db.query(
+      'SELECT id, name, email, username, created_on, updated_on FROM users WHERE id = $1',
+      [id]
+    )
+  ).rows[0];
+
+  return user;
+};
+
+export { addUserToDb, findOne, findById };
