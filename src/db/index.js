@@ -10,7 +10,6 @@ const pool = new Pool({
   port: db_port,
 });
 
-//! Not Working
 export default {
   query: async (text, params) => {
     return await pool.query(text, params);
