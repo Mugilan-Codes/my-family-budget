@@ -3,7 +3,7 @@ import cors from 'cors';
 
 const app = express();
 
-import { port } from './env';
+import { port } from './src/config';
 import mountRoutes from './routes';
 
 app.use(cors());
