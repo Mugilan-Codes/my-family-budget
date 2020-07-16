@@ -6,4 +6,8 @@ const generateAccessToken = (payload) => {
   return jwt.sign(payload, jwt_secret, { expiresIn: '1h' });
 };
 
-export { generateAccessToken };
+const verifyToken = (token) => {
+  return jwt.verify(token, jwt_secret);
+};
+
+export { generateAccessToken, verifyToken };
