@@ -9,8 +9,11 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ errors: [{ msg: user.err_msg }] });
     }
 
+    // return json web token
+
     res.json(user);
   } catch (err) {
+    console.log(err.message);
     res.status(500).send('Sever Error');
   }
 };

@@ -36,7 +36,7 @@ const addUser = async ({ name, email, password, username }) => {
     return await addUserToDb(newUser);
   } catch (err) {
     console.log(err.message);
-    return Error(err);
+    return new Error(err);
   }
 };
 
