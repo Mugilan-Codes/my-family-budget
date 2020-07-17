@@ -4,7 +4,7 @@ import { addUser, retrieveUser } from '../services/users';
 import { generateAccessToken } from '../utils/token';
 import { comparePassword } from '../utils/crypt';
 
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
   const { name, email, password, username } = req.body;
   try {
     const user = await addUser({ name, email, password, username });
@@ -22,11 +22,11 @@ const registerUser = async (req, res) => {
     res.json({ token });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send('Sever Error');
+    next(err);
   }
 };
 
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
   const { id } = req.user;
   try {
     const user = await retrieveUser({ id });
@@ -38,11 +38,11 @@ const getUser = async (req, res) => {
     res.json(user);
   } catch (err) {
     console.log(err.message);
-    res.status(500).send('Sever Error');
+    next(err);
   }
 };
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
     res.json({ token });
   } catch (err) {
     console.log(err.message);
-    res.status(500).send('Sever Error');
+    next(err);
   }
 };
 

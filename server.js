@@ -22,7 +22,8 @@ app.use((err, req, res, next) => {
     return res.status(400).json({ error: err.joi.message });
   }
 
-  return res.status(500).send(err);
+  // console.log(`Stack : ${err.stack}`);
+  return res.status(500).send('Server Error');
 });
 
 app.use((req, res) => {
