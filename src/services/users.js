@@ -1,18 +1,18 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { addUserToDb, findOne, findById } from '../db/users';
+import User from '../db/users';
 import { hashPassword } from '../utils/crypt';
 
 const addUser = async ({ name, email, password, username }) => {
   try {
-    let user = await findOne({ email });
+    let user = await User.findOne({ email });
     if (user) {
       return { err_msg: 'Email already exists' };
     }
 
     if (!username) username = null;
 
-    user = await findOne({ username });
+    user = await User.findOne({ username });
     if (user) {
       return { err_msg: 'Username already exists' };
     }
@@ -33,7 +33,7 @@ const addUser = async ({ name, email, password, username }) => {
       updated_on,
     };
 
-    return await addUserToDb(newUser);
+    return await User.createUser(newUser);
   } catch (err) {
     console.log(err.message);
     return new Error(err);
@@ -44,11 +44,11 @@ const retrieveUser = async ({ id, email, username } = {}) => {
   let user;
   try {
     if (id) {
-      user = await findById(id);
+      user = await User.findById(id);
     } else {
-      user = await findOne({ email });
+      user = await User.findOne({ email });
       if (!user) {
-        user = await findOne({ username });
+        user = await User.findOne({ username });
         if (!user) {
           return { err_msg: 'Invalid Credentials' };
         }

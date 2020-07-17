@@ -1,6 +1,6 @@
 import db from './';
 
-const addUserToDb = async ({
+const createUser = async ({
   id,
   name,
   email,
@@ -56,4 +56,4 @@ const findById = async (id) => {
   return user;
 };
 
-export { addUserToDb, findOne, findById };
+export default { createUser, findOne, findById };
