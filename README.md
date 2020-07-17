@@ -73,4 +73,8 @@ Keep track of all family budget
 
 - [PostgreSQL Official Website](https://www.postgresql.org/)
 - [Node-Postgres](https://node-postgres.com/)
+- [JOI Validation Module](https://hapi.dev/module/joi/)
+- [Docker Hub](https://hub.docker.com/)
 - [Bulletproof node.js project architecture ](https://softwareontheroad.com/ideal-nodejs-project-structure/)
+- [Using Docker & Docker Compose To Improve Your Full Stack Application Development](https://medium.com/@paigen11/using-docker-docker-compose-to-improve-your-full-stack-application-development-1e41280748f4)
+- [Error handling in Express using Middleware](https://codeforgeek.com/error-handling-in-express-using-middleware/)
