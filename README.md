@@ -21,12 +21,12 @@ Keep track of all family budget
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [express](https://www.npmjs.com/package/express)
 - [pg](https://www.npmjs.com/package/pg)
-- [sql-template-tag](https://www.npmjs.com/package/sql-template-tag)
 - [cors](https://www.npmjs.com/package/cors)
-- [express-validator](https://www.npmjs.com/package/express-validator)
+- [express-validator](https://www.npmjs.com/package/express-validator)!
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [uuid](https://www.npmjs.com/package/uuid)
+- [celebrate](https://www.npmjs.com/package/celebrate)
 
 > Dev Dependency
 
