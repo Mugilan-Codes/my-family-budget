@@ -14,7 +14,9 @@ app.use(Logger);
 
 mountRoutes(app);
 
+// Celebrate library error handler
 app.use(errors());
+// Custom server error handler
 app.use((err, req, res, next) => {
   if (err.joi) {
     return res.status(400).json({ error: err.joi.message });

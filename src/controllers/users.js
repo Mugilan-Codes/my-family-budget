@@ -42,7 +42,6 @@ const getUser = async (req, res) => {
   }
 };
 
-// todo - put the validation into the validation middleware
 const loginUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

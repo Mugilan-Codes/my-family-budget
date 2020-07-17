@@ -1,7 +1,5 @@
-import { check, validationResult, oneOf } from 'express-validator';
-import { celebrate, Joi, errors } from 'celebrate';
+import { check, validationResult, oneOf, body } from 'express-validator';
 
-// todo - find a way to make the run() work with oneOf()
 const _validator = (validations) => {
   return async (req, res, next) => {
     await Promise.all(validations.map((validation) => validation.run(req)));
@@ -15,21 +13,7 @@ const _validator = (validations) => {
   };
 };
 
-// [
-//       oneOf([
-//         check('email', 'Enter a valid email').isEmail(),
-//         check('username', 'Username must be valid').isLength({ min: 5 }),
-//       ]),
-//       check('password', 'Enter a valid password').isLength({ min: 6 }),
-//     ],
-const loginSchema = Joi.object({
-  email: Joi.string().email(),
-  username: Joi.string().min(5),
-  password: Joi.string().required(),
-}).xor('email', 'username');
-
-// todo - Make use of the login method
-const validate = (method) => {
+const validate = (method, property = 'body') => {
   switch (method) {
     case 'register':
       return _validator([
@@ -42,9 +26,7 @@ const validate = (method) => {
           .isLength({ min: 5 })
           .optional({ checkFalsy: true }),
       ]);
-    case 'login':
-      return _cvalidator(loginSchema);
   }
 };
 
-export { validate, loginSchema };
+export { validate };
