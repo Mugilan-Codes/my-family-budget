@@ -46,12 +46,12 @@ const loginUser = async (req, res) => {
     const user = await retrieveUser({ email, username });
 
     if (user.err_msg) {
-      return res.status(422).json({ errors: [{ msg: user.err_msg }] });
+      return res.status(401).json({ errors: [{ msg: user.err_msg }] });
     }
 
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
-      return res.status(422).json({ errors: [{ msg: 'Invalid Credentials' }] });
+      return res.status(401).json({ errors: [{ msg: 'Invalid Credentials' }] });
     }
 
     const payload = {
