@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import { errors } from 'celebrate';
 
 const app = express();
 
@@ -12,6 +13,15 @@ app.use(express.json({ extended: false }));
 app.use(Logger);
 
 mountRoutes(app);
+
+app.use(errors());
+app.use((err, req, res, next) => {
+  if (err.joi) {
+    return res.status(400).json({ error: err.joi.message });
+  }
+
+  return res.status(500).send(err);
+});
 
 app.use((req, res) => {
   res.status(404).send('404 not found');
