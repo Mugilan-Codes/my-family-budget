@@ -13,6 +13,10 @@ app.use(Logger);
 
 mountRoutes(app);
 
+app.use((req, res) => {
+  res.status(404).send('404 not found');
+});
+
 app.get('/', (req, res) => {
   res.send('API Running...');
 });
