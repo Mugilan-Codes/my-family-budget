@@ -2,7 +2,7 @@
 
 Keep track of all family budget
 
-## TODO:
+## TODO
 
 1. Use config and dotenv together to provide fallbacks and understanding
 1. Complete the routes
@@ -75,6 +75,6 @@ Keep track of all family budget
 - [Node-Postgres](https://node-postgres.com/)
 - [JOI Validation Module](https://hapi.dev/module/joi/)
 - [Docker Hub](https://hub.docker.com/)
-- [Bulletproof node.js project architecture ](https://softwareontheroad.com/ideal-nodejs-project-structure/)
+- [Bulletproof node.js project architecture](https://softwareontheroad.com/ideal-nodejs-project-structure/)
 - [Using Docker & Docker Compose To Improve Your Full Stack Application Development](https://medium.com/@paigen11/using-docker-docker-compose-to-improve-your-full-stack-application-development-1e41280748f4)
 - [Error handling in Express using Middleware](https://codeforgeek.com/error-handling-in-express-using-middleware/)
