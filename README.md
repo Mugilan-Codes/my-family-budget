@@ -4,6 +4,7 @@ Keep track of all family budget
 
 ## TODO
 
+1. Dockerize the Project
 1. Use config and dotenv together to provide fallbacks and understanding
 1. Complete the routes
 1. Refactor Backend
@@ -22,7 +23,6 @@ Keep track of all family budget
 - [express](https://www.npmjs.com/package/express)
 - [pg](https://www.npmjs.com/package/pg)
 - [cors](https://www.npmjs.com/package/cors)
-- [express-validator](https://www.npmjs.com/package/express-validator)!
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [uuid](https://www.npmjs.com/package/uuid)

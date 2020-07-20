@@ -10,8 +10,6 @@ const addUser = async ({ name, email, password, username }) => {
       return { err_msg: 'Email already exists' };
     }
 
-    if (!username) username = null;
-
     user = await User.findOne({ username });
     if (user) {
       return { err_msg: 'Username already exists' };

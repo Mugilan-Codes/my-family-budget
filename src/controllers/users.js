@@ -1,5 +1,3 @@
-import { validationResult } from 'express-validator';
-
 import { addUser, retrieveUser } from '../services/users';
 import { generateAccessToken } from '../utils/token';
 import { comparePassword } from '../utils/crypt';
@@ -43,11 +41,6 @@ const getUser = async (req, res, next) => {
 };
 
 const loginUser = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   const { email, username, password } = req.body;
   try {
     const user = await retrieveUser({ email, username });

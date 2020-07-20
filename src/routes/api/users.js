@@ -1,10 +1,11 @@
 import express from 'express';
+import { celebrate } from 'celebrate';
 
 import { registerUser } from '../../controllers/users';
-import { validate } from '../../middleware/validator';
+import { registerSchema } from '../../utils/schema';
 
 const router = express.Router();
 
-router.post('/', validate('register'), registerUser);
+router.post('/', celebrate({ body: registerSchema }), registerUser);
 
 export default router;
