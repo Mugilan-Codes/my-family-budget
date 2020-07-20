@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "create-dev-tables": "babel-node ./config/run-script createAllTables",
-    "drop-dev-tables": "babel-node ./config/run-script dropAllTables",
+    "create-dev-tables": "babel-node ./src/temp createAllTables",
+    "drop-dev-tables": "babel-node ./src/temp dropAllTables",
     "setup": "npm-run-all -p start create-dev-tables",
     "setup:recreate": "npm-run-all -s drop-dev-tables create-dev-tables",
     "start": "nodemon --exec babel-node server"
