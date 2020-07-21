@@ -2,6 +2,16 @@ import { addUser, retrieveUser } from '../services/users';
 import { generateAccessToken } from '../utils/token';
 import { comparePassword } from '../utils/crypt';
 
+/*
+ * @route   POST api/users/
+ *
+ * @desc    Register User
+ *
+ * @param   {string}  name
+ * @param   {string}  email
+ * @param   {string}  password
+ * @param   {string}  [username=null]
+ */
 const registerUser = async (req, res, next) => {
   const { name, email, password, username } = req.body;
   try {
@@ -24,6 +34,12 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+/*
+ * @route   GET api/users/
+ * @access  private
+ *
+ * @desc    Get Current User
+ */
 const getUser = async (req, res, next) => {
   const { id } = req.user;
   try {
@@ -40,6 +56,14 @@ const getUser = async (req, res, next) => {
   }
 };
 
+/*
+ * @route   POST api/users/auth
+ *
+ * @desc    Authenticate User
+ *
+ * @param   {string}  [username or email]
+ * @param   {string}  password
+ */
 const loginUser = async (req, res, next) => {
   const { email, username, password } = req.body;
   try {

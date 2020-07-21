@@ -1,11 +1,15 @@
 import express from 'express';
 import { celebrate } from 'celebrate';
 
-import { registerUser } from '../../controllers/users';
-import { registerSchema } from '../../utils/schema';
+import { registerUser, loginUser, getUser } from '../../controllers/users';
+import { registerSchema, loginSchema } from '../../utils/schema';
+import { auth } from '../../middleware/auth';
 
 const router = express.Router();
 
-router.post('/', celebrate({ body: registerSchema }), registerUser);
+router
+  .get('/', auth, getUser)
+  .post('/', celebrate({ body: registerSchema }), registerUser)
+  .post('/auth', celebrate({ body: loginSchema }), loginUser);
 
 export default router;
