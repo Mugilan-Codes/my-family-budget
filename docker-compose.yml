@@ -1,17 +1,19 @@
 version: '3.4'
 
 services:
-    express:
-      image: node:12-alpine
-      volumes: 
-        - type: bind
-        source: ./server/
-        target: /app
-      working_dir: /app
-      command: npm run dev
-      ports: 
-        - "3000:3000"
-      environment: 
-        - NODE_ENV=development
-        - PORT=3000
-        
+  backend:
+    container_name: 'node-server'
+    build: './server/'
+    environment:
+      JWT_SECRET: 'engvnangvneroakngoin'
+    ports:
+      - '5000:5000'
+  db:
+    image: 'postgres:12'
+    container_name: 'postgres'
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/pg_data:/var/lib/postgresql/data
