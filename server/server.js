@@ -26,12 +26,12 @@ app.use((err, req, res, next) => {
   return res.status(500).send('Server Error');
 });
 
-app.use((req, res) => {
-  res.status(404).send('404 not found');
-});
-
 app.get('/', (req, res) => {
   res.send('API Running...');
+});
+
+app.use((req, res) => {
+  res.status(404).send('404 not found');
 });
 
 app.listen(port, () => {
