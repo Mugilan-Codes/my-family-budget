@@ -1,8 +1,17 @@
-version: '3'
+version: '3.4'
 
 services:
-  server:
-    container_name: 'node_server'
-    build: ./server/
-    ports:
-      - '3001:5000'
+    express:
+      image: node:12-alpine
+      volumes: 
+        - type: bind
+        source: ./server/
+        target: /app
+      working_dir: /app
+      command: npm run dev
+      ports: 
+        - "3000:3000"
+      environment: 
+        - NODE_ENV=development
+        - PORT=3000
+        
