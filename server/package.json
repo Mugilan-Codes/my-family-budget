@@ -8,7 +8,10 @@
     "drop-dev-tables": "babel-node ./src/temp dropAllTables",
     "setup": "npm-run-all -p start create-dev-tables",
     "setup:recreate": "npm-run-all -s drop-dev-tables create-dev-tables",
-    "start": "nodemon --exec babel-node server"
+    "start:old": "nodemon --exec babel-node server",
+    "build": "babel src -d dist",
+    "start": "npm run build && nodemon dist/server.js",
+    "serve": "node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -32,8 +35,8 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.10.4",
-    "@babel/node": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "make-runnable": "^1.3.6",
     "nodemon": "^2.0.4",

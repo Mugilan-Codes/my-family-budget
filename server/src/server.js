@@ -1,12 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
+// @babel/polyfill - regenerator-runtime/runtime error
+import 'regenerator-runtime/runtime';
 
 const app = express();
 
-import { port } from './src/config';
-import mountRoutes from './src/routes';
-import { Logger } from './src/middleware/logger';
+import { port } from './config';
+import mountRoutes from './routes';
+import { Logger } from './middleware/logger';
 
 app.use(cors());
 app.use(express.json({ extended: false }));
