@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import User from '../db/users';
-import { hashPassword } from '../utils/crypt';
+import { hashPassword, comparePassword } from '../utils/crypt';
 
 const addUser = async ({ name, email, password, username }) => {
   try {
@@ -59,4 +59,48 @@ const retrieveUser = async ({ id, email, username } = {}) => {
   }
 };
 
-export { addUser, retrieveUser };
+const updateUser = async ({ id, name, email, username, password }) => {
+  console.log({ id, name, email, username, password });
+  try {
+    let user = await User.findById(id, true);
+
+    console.log({ user });
+
+    name = name === null ? user.name : name;
+    email = email === null ? user.email : email;
+    username = username === null ? user.username : username;
+
+    if (password) {
+      const isMatch = await comparePassword(password, user.password);
+      if (!isMatch) {
+        password = password;
+      } else {
+        password = user.password;
+      }
+    } else {
+      password = user.password;
+    }
+
+    password = await hashPassword(password);
+
+    const updated_on = new Date();
+
+    let updateUserInfo = {
+      id,
+      name,
+      email,
+      username,
+      password,
+      updated_on,
+    };
+
+    console.log({ updateUserInfo });
+
+    return await User.updateUser(updateUserInfo);
+  } catch (err) {
+    console.log(err.message);
+    return new Error(err);
+  }
+};
+
+export { addUser, retrieveUser, updateUser };

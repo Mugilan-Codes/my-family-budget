@@ -43,15 +43,19 @@ const findOne = async ({ email, username } = {}) => {
   return user;
 };
 
-const findById = async (id) => {
+const findById = async (id, password = false) => {
   let user;
 
-  user = (
-    await db.query(
-      'SELECT id, name, email, username, created_on, updated_on FROM users WHERE id = $1',
-      [id]
-    )
-  ).rows[0];
+  if (password) {
+    user = (await db.query('SELECT * FROM users WHERE id = $1', [id])).rows[0];
+  } else {
+    user = (
+      await db.query(
+        'SELECT id, name, email, username, created_on, updated_on FROM users WHERE id = $1',
+        [id]
+      )
+    ).rows[0];
+  }
 
   return user;
 };
