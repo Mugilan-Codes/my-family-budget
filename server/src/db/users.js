@@ -56,4 +56,25 @@ const findById = async (id) => {
   return user;
 };
 
-export default { createUser, findOne, findById };
+const updateUser = async ({
+  id,
+  name,
+  email,
+  username,
+  password,
+  updated_on,
+}) => {
+  const query = `
+    UPDATE users
+    SET name = $1, email = $2, username = $3, password = $4, updated_on = $5
+    WHERE id = $6
+  `;
+
+  const result = (
+    await db.query(query, [name, email, username, password, updated_on, id])
+  ).rows[0];
+
+  return result;
+};
+
+export default { createUser, findOne, findById, updateUser };
