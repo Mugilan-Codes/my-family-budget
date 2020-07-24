@@ -1,4 +1,4 @@
-import { addUser, retrieveUser } from '../services/users';
+import { addUser, retrieveUser, updateUser } from '../services/users';
 import { generateAccessToken } from '../utils/token';
 import { comparePassword } from '../utils/crypt';
 
@@ -93,4 +93,26 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-export { registerUser, getUser, loginUser };
+const updateUser = async (req, res, next) => {
+  const { name, email, username, password } = req.body;
+  const { id } = req.user;
+
+  try {
+    const updateUser = await updateUser({
+      id,
+      name,
+      email,
+      username,
+      password,
+    });
+
+    console.log({ updateUser });
+
+    res.json({ updateUser });
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};
+
+export { registerUser, getUser, loginUser, updateUser };
