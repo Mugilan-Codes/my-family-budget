@@ -13,4 +13,11 @@ const loginSchema = Joi.object({
   password: Joi.string().required(),
 }).xor('email', 'username');
 
-export { loginSchema, registerSchema };
+const updateSchema = Joi.object({
+  name: Joi.string().max(30).default(null),
+  email: Joi.string().email().max(50).default(null),
+  password: Joi.string().min(6).default(null),
+  username: Joi.string().min(5).max(30).default(null),
+}).xor('name', 'email', 'username', 'password');
+
+export { loginSchema, registerSchema, updateSchema };

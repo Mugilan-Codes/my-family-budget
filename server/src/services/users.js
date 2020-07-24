@@ -67,6 +67,7 @@ const updateUser = async ({ id, name, email, username, password }) => {
     console.log({ user });
 
     name = name === null ? user.name : name;
+    // name = name || user.name;
     email = email === null ? user.email : email;
     username = username === null ? user.username : username;
 

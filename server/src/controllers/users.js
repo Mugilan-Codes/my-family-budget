@@ -93,12 +93,12 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-const updateUser = async (req, res, next) => {
+const update = async (req, res, next) => {
   const { name, email, username, password } = req.body;
   const { id } = req.user;
 
   try {
-    const updateUser = await updateUser({
+    const updatedUser = await updateUser({
       id,
       name,
       email,
@@ -106,13 +106,13 @@ const updateUser = async (req, res, next) => {
       password,
     });
 
-    console.log({ updateUser });
+    console.log({ updatedUser });
 
-    res.json({ updateUser });
+    res.json({ updatedUser });
   } catch (err) {
     console.log(err.message);
     next(err);
   }
 };
 
-export { registerUser, getUser, loginUser, updateUser };
+export { registerUser, getUser, loginUser, update };
