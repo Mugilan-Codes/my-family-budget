@@ -60,6 +60,26 @@ const findById = async (id, password = false) => {
   return user;
 };
 
+const checkUser = async (id, { username, email } = {}) => {
+  if (username) {
+    return (
+      await db.query(
+        'SELECT username FROM users WHERE id != $1 AND username = $2',
+        [id, username]
+      )
+    ).rows;
+  }
+
+  if (email) {
+    return (
+      await db.query('SELECT email FROM users WHERE id != $1 AND email = $2', [
+        id,
+        email,
+      ])
+    ).rows;
+  }
+};
+
 const updateUser = async ({
   id,
   name,
@@ -74,11 +94,16 @@ const updateUser = async ({
     WHERE id = $6
   `;
 
-  const result = (
-    await db.query(query, [name, email, username, password, updated_on, id])
-  ).rows[0];
+  const result = await db.query(query, [
+    name,
+    email,
+    username,
+    password,
+    updated_on,
+    id,
+  ]);
 
   return result;
 };
 
-export default { createUser, findOne, findById, updateUser };
+export default { createUser, findOne, findById, updateUser, checkUser };

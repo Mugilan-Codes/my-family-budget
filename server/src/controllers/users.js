@@ -106,9 +106,13 @@ const update = async (req, res, next) => {
       password,
     });
 
+    if (updatedUser.err_msg) {
+      return res.status(401).json({ errors: [{ msg: updatedUser.err_msg }] });
+    }
+
     console.log({ updatedUser });
 
-    res.json({ updatedUser });
+    res.send('User Updated');
   } catch (err) {
     console.log(err.message);
     next(err);

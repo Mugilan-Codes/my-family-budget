@@ -18,6 +18,6 @@ const updateSchema = Joi.object({
   email: Joi.string().email().max(50).default(null),
   password: Joi.string().min(6).default(null),
   username: Joi.string().min(5).max(30).default(null),
-}).xor('name', 'email', 'username', 'password');
+}).or('name', 'email', 'password', 'username');
 
 export { loginSchema, registerSchema, updateSchema };

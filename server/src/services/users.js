@@ -64,12 +64,19 @@ const updateUser = async ({ id, name, email, username, password }) => {
   try {
     let user = await User.findById(id, true);
 
-    console.log({ user });
-
     name = name === null ? user.name : name;
-    // name = name || user.name;
     email = email === null ? user.email : email;
     username = username === null ? user.username : username;
+
+    let checkUser = await User.checkUser(id, { email });
+    if (checkUser.length > 0) {
+      return { err_msg: 'Email already taken' };
+    }
+
+    checkUser = await User.checkUser(id, { username });
+    if (checkUser.length > 0) {
+      return { err_msg: 'Username already taken' };
+    }
 
     if (password) {
       const isMatch = await comparePassword(password, user.password);
@@ -95,9 +102,9 @@ const updateUser = async ({ id, name, email, username, password }) => {
       updated_on,
     };
 
-    console.log({ updateUserInfo });
+    const updated = await User.updateUser(updateUserInfo);
 
-    return await User.updateUser(updateUserInfo);
+    return updated;
   } catch (err) {
     console.log(err.message);
     return new Error(err);
