@@ -1,4 +1,9 @@
-import { addUser, retrieveUser, updateUser } from '../services/users';
+import {
+  addUser,
+  retrieveUser,
+  updateUser,
+  deleteUserService,
+} from '../services/users';
 import { generateAccessToken } from '../utils/token';
 import { comparePassword } from '../utils/crypt';
 
@@ -119,4 +124,24 @@ const update = async (req, res, next) => {
   }
 };
 
-export { registerUser, getUser, loginUser, update };
+const deleteUser = async (req, res, next) => {
+  const { password } = req.body;
+  const { id } = req.user;
+
+  try {
+    const deletedUser = await deleteUserService(id, password);
+
+    if (deletedUser.err_msg) {
+      return res.status(401).json({ errors: [{ msg: deletedUser.err_msg }] });
+    }
+
+    console.log({ deletedUser });
+
+    res.send('User Deleted');
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};
+
+export { registerUser, getUser, loginUser, update, deleteUser };

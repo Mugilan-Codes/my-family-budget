@@ -106,4 +106,15 @@ const updateUser = async ({
   return result;
 };
 
-export default { createUser, findOne, findById, updateUser, checkUser };
+const deleteUser = async (id) => {
+  return await db.query('DELETE FROM users WHERE id = $1', [id]);
+};
+
+export default {
+  createUser,
+  findOne,
+  findById,
+  updateUser,
+  checkUser,
+  deleteUser,
+};

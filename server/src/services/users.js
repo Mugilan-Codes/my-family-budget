@@ -60,7 +60,6 @@ const retrieveUser = async ({ id, email, username } = {}) => {
 };
 
 const updateUser = async ({ id, name, email, username, password }) => {
-  console.log({ id, name, email, username, password });
   try {
     let user = await User.findById(id, true);
 
@@ -111,4 +110,22 @@ const updateUser = async ({ id, name, email, username, password }) => {
   }
 };
 
-export { addUser, retrieveUser, updateUser };
+const deleteUserService = async (id, password) => {
+  try {
+    let user = await User.findById(id, true);
+
+    const isMatch = await comparePassword(password, user.password);
+    if (!isMatch) {
+      return { err_msg: 'Password does not match' };
+    }
+
+    const deleted = await User.deleteUser(id);
+
+    return deleted;
+  } catch (err) {
+    console.log(err.message);
+    return new Error(err);
+  }
+};
+
+export { addUser, retrieveUser, updateUser, deleteUserService };

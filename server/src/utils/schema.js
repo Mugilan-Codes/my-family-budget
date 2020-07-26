@@ -20,4 +20,8 @@ const updateSchema = Joi.object({
   username: Joi.string().min(5).max(30).default(null),
 }).or('name', 'email', 'password', 'username');
 
-export { loginSchema, registerSchema, updateSchema };
+const deleteSchema = Joi.object({
+  password: Joi.string().required(),
+});
+
+export { loginSchema, registerSchema, updateSchema, deleteSchema };
