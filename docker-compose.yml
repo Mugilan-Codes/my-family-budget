@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server/
+    ports:
+      - '5000:5000'
+    environment:
+      PGHOST: postgres
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      WAIT_HOSTS: postgres:5432
+      WAIT_HOSTS_TIMEOUT: 300
+      WAIT_SLEEP_INTERVAL: 30
+      WAIT_HOST_CONNECT_TIMEOUT: 30
+      JWT_SECRET: 'vwje ifnvawnd gfinewokfnovaiNESDGknvao'
+
+  postgres:
+    image: postgres:12-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: family_budget
+    volumes:
+      - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
