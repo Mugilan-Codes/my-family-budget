@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:12-alpine AS development
 
 WORKDIR /usr/src/app
 
@@ -6,7 +6,7 @@ COPY package*.json .babelrc ./
 
 RUN npm ci
 
-COPY ./src ./src
+# COPY ./src ./src
 
 EXPOSE 5000
 

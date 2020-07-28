@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('API Running...');
+  res.send('API Running...awesome');
 });
 
 app.use((req, res) => {
