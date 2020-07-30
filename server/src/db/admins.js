@@ -83,5 +83,7 @@ export default {
   addAdmin,
   getAllUsers,
   deleteAllUsers,
+  getUserById,
+  deleteUserById,
   getAdmin,
 };
