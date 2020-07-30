@@ -12,18 +12,41 @@ pool.on('connect', () => {
 
 const createUsersTable = async () => {
   const query = `CREATE TABLE IF NOT EXISTS users
-      (
-        id UUID PRIMARY KEY,
-        name VARCHAR(30) NOT NULL,
-        email VARCHAR(50) UNIQUE NOT NULL,
-        password VARCHAR(100) NOT NULL,
-        username VARCHAR(30) UNIQUE,
-        created_on TIMESTAMPTZ NOT NULL,
-        updated_on TIMESTAMPTZ NOT NULL
-      )`;
+    (
+      id UUID PRIMARY KEY,
+      name VARCHAR(30) NOT NULL,
+      email VARCHAR(50) UNIQUE NOT NULL,
+      password VARCHAR(100) NOT NULL,
+      username VARCHAR(30) UNIQUE,
+      created_on TIMESTAMPTZ NOT NULL,
+      updated_on TIMESTAMPTZ NOT NULL
+    )`;
   try {
     await pool.query(query);
     console.log("Table 'users' Created");
+    pool.end();
+  } catch (err) {
+    console.error(err.message);
+    pool.end();
+  }
+};
+
+const createAdminsTable = async () => {
+  const query = `CREATE TABLE IF NOT EXISTS admins
+    (
+      id UUID PRIMARY KEY,
+      name VARCHAR(30),
+      email VARCHAR(50) UNIQUE NOT NULL,
+      password VARCHAR(100) NOT NULL,
+      username VARCHAR(30) UNIQUE,
+      created_on TIMESTAMPTZ NOT NULL,
+      updated_on TIMESTAMPTZ NOT NULL
+    )
+  `;
+
+  try {
+    await pool.query(query);
+    console.log("Table 'admins' Created");
     pool.end();
   } catch (err) {
     console.error(err.message);
@@ -43,12 +66,27 @@ const dropUsersTable = async () => {
   }
 };
 
+const dropAdminsTable = async () => {
+  const query = `DROP TABLE IF EXISTS admins`;
+
+  try {
+    await pool.query(query);
+    console.log("Table 'admins' Dropped");
+    pool.end();
+  } catch (err) {
+    console.error(err.message);
+    pool.end();
+  }
+};
+
 const createAllTables = async () => {
   createUsersTable();
+  createAdminsTable();
 };
 
 const dropAllTables = async () => {
   dropUsersTable();
+  dropAdminsTable();
 };
 
 pool.on('remove', () => {
