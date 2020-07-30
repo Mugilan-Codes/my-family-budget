@@ -1,11 +1,28 @@
 import db from './';
 
-const getAdmin = async (id) => {
+const getAdminById = async (id) => {
   const query = 'SELECT * FROM admins WHERE id = $1';
 
   const result = (await db.query(query, [id])).rows[0];
 
   return result;
+};
+
+const getAdmin = async ({ email, username } = {}) => {
+  let admin;
+
+  if (email) {
+    user = (await db.query('SELECT * FROM admins WHERE email = $1', [email]))
+      .rows[0];
+  }
+
+  if (username) {
+    user = (
+      await db.query('SELECT * FROM admins WHERE username = $1', [username])
+    ).rows[0];
+  }
+
+  return admin;
 };
 
 const addAdmin = async ({
@@ -61,4 +78,10 @@ const deleteUserById = async (id) => {
   return result;
 };
 
-export default { getAdmin, addAdmin, getAllUsers, deleteAllUsers };
+export default {
+  getAdminById,
+  addAdmin,
+  getAllUsers,
+  deleteAllUsers,
+  getAdmin,
+};
