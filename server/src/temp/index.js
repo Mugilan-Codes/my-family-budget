@@ -35,7 +35,7 @@ const createAdminsTable = async () => {
   const query = `CREATE TABLE IF NOT EXISTS admins
     (
       id UUID PRIMARY KEY,
-      name VARCHAR(30),
+      name VARCHAR(30) NOT NULL,
       email VARCHAR(50) UNIQUE NOT NULL,
       password VARCHAR(100) NOT NULL,
       username VARCHAR(30) UNIQUE,
