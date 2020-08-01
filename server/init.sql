@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
     updated_on TIMESTAMPTZ NOT NULL
 )
 
+-- One Super Admin is enough
+-- Insert one Super Admin while creating table admins
+-- Give option to create new admins, but not necessary
 DROP TABLE IF EXISTS admins
 CREATE TABLE IF NOT EXISTS admins (
     id UUID PRIMARY KEY,
