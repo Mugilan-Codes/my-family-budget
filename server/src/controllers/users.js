@@ -1,7 +1,7 @@
 import {
-  addUser,
-  retrieveUser,
-  updateUser,
+  registerUserService,
+  getUserService,
+  updateUserService,
   deleteUserService,
 } from '../services/users';
 import { generateAccessToken } from '../utils/token';
@@ -20,7 +20,7 @@ import { comparePassword } from '../utils/crypt';
 const registerUserController = async (req, res, next) => {
   const { name, email, password, username } = req.body;
   try {
-    const user = await addUser({ name, email, password, username });
+    const user = await registerUserService({ name, email, password, username });
 
     if (user.err_msg) {
       return res.status(409).json({ errors: [{ msg: user.err_msg }] });
@@ -48,7 +48,7 @@ const registerUserController = async (req, res, next) => {
 const getUserController = async (req, res, next) => {
   const { id } = req.user;
   try {
-    const user = await retrieveUser({ id });
+    const user = await getUserService({ id });
 
     if (!user) {
       return res.status(404).json({ errors: [{ msg: 'User Not Found' }] });
@@ -113,7 +113,7 @@ const updateUserController = async (req, res, next) => {
   const { id } = req.user;
 
   try {
-    const updatedUser = await updateUser({
+    const updatedUser = await updateUserService({
       id,
       name,
       email,

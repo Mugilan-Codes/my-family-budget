@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import User from '../db/users';
 import { hashPassword, comparePassword } from '../utils/crypt';
 
-const addUser = async ({ name, email, password, username }) => {
+const registerUserService = async ({ name, email, password, username }) => {
   try {
     let user = await User.findOne({ email });
     if (user) {
@@ -38,7 +38,7 @@ const addUser = async ({ name, email, password, username }) => {
   }
 };
 
-const retrieveUser = async ({ id, email, username } = {}) => {
+const getUserService = async ({ id, email, username } = {}) => {
   let user;
   try {
     if (id) {
@@ -59,7 +59,7 @@ const retrieveUser = async ({ id, email, username } = {}) => {
   }
 };
 
-const updateUser = async ({ id, name, email, username, password }) => {
+const updateUserService = async ({ id, name, email, username, password }) => {
   try {
     let user = await User.findById(id, true);
 
@@ -80,15 +80,14 @@ const updateUser = async ({ id, name, email, username, password }) => {
     if (password) {
       const isMatch = await comparePassword(password, user.password);
       if (!isMatch) {
-        password = password;
+        // password = password;
+        password = await hashPassword(password);
       } else {
         password = user.password;
       }
     } else {
       password = user.password;
     }
-
-    password = await hashPassword(password);
 
     const updated_on = new Date();
 
@@ -128,4 +127,9 @@ const deleteUserService = async (id, password) => {
   }
 };
 
-export { addUser, retrieveUser, updateUser, deleteUserService };
+export {
+  registerUserService,
+  getUserService,
+  updateUserService,
+  deleteUserService,
+};
