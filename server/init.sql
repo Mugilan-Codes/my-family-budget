@@ -8,3 +8,16 @@ CREATE TABLE IF NOT EXISTS users (
     created_on TIMESTAMPTZ NOT NULL,
     updated_on TIMESTAMPTZ NOT NULL
 )
+
+CREATE TABLE IF NOT EXISTS entries (
+    id UUID,
+    user_id REFERENCES users(id) CASCADE DELETE,
+    category TEXT NOT NULL,
+    description TEXT,
+    type VARCHAR(10) CHECK(type IN('+', '-')) NOT NULL,
+    amount money NOT NULL,
+    date TIMESTAMPTZ NOT NULL, 
+    created_on TIMESTAMPTZ NOT NULL,
+    updated_on TIMESTAMPTZ NOT NULL,
+    PRIMARY KEY(id, user_id)
+)
