@@ -2,27 +2,20 @@ import express from 'express';
 import { celebrate } from 'celebrate';
 
 import {
-  registerUser,
-  loginUser,
-  getUser,
-  update,
-  deleteUser,
+  registerUserController,
+  getUserController,
+  updateUserController,
+  deleteUserController,
 } from '../../controllers/users';
-import {
-  registerSchema,
-  loginSchema,
-  updateSchema,
-  deleteSchema,
-} from '../../utils/schema';
+import { registerSchema, updateSchema, deleteSchema } from '../../utils/schema';
 import { auth } from '../../middleware/auth';
 
 const router = express.Router();
 
 router
-  .get('/', auth, getUser)
-  .post('/', celebrate({ body: registerSchema }), registerUser)
-  .post('/auth', celebrate({ body: loginSchema }), loginUser)
-  .put('/', [auth, celebrate({ body: updateSchema })], update)
-  .delete('/', [auth, celebrate({ body: deleteSchema })], deleteUser);
+  .get('/', auth, getUserController)
+  .post('/', celebrate({ body: registerSchema }), registerUserController)
+  .put('/', [auth, celebrate({ body: updateSchema })], updateUserController)
+  .delete('/', [auth, celebrate({ body: deleteSchema })], deleteUserController);
 
 export default router;

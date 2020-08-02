@@ -8,7 +8,7 @@ import { generateAccessToken } from '../utils/token';
 import { comparePassword } from '../utils/crypt';
 
 /*
- * @route   POST api/users/
+ * @route   POST /api/users/
  *
  * @desc    Register User
  *
@@ -17,7 +17,7 @@ import { comparePassword } from '../utils/crypt';
  * @param   {string}  password
  * @param   {string}  [username=null]
  */
-const registerUser = async (req, res, next) => {
+const registerUserController = async (req, res, next) => {
   const { name, email, password, username } = req.body;
   try {
     const user = await addUser({ name, email, password, username });
@@ -40,12 +40,12 @@ const registerUser = async (req, res, next) => {
 };
 
 /*
- * @route   GET api/users/
+ * @route   GET /api/users/
  * @access  private
  *
- * @desc    Get Current User
+ * @desc    Get Current User by Token
  */
-const getUser = async (req, res, next) => {
+const getUserController = async (req, res, next) => {
   const { id } = req.user;
   try {
     const user = await retrieveUser({ id });
@@ -62,14 +62,14 @@ const getUser = async (req, res, next) => {
 };
 
 /*
- * @route   POST api/users/auth
+ * @route   POST /api/auth/
  *
  * @desc    Authenticate User
  *
  * @param   {string}  [username or email]
  * @param   {string}  password
  */
-const loginUser = async (req, res, next) => {
+const loginUserController = async (req, res, next) => {
   const { email, username, password } = req.body;
   try {
     const user = await retrieveUser({ email, username });
@@ -98,7 +98,17 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-const update = async (req, res, next) => {
+/*
+ * @route   PUT /api/users/
+ *
+ * @desc    Update User ( Atleast one param must be present )
+ *
+ * @param   {string}  [name=null]
+ * @param   {string}  [email=null]
+ * @param   {string}  [password=null]
+ * @param   {string}  [username=null]
+ */
+const updateUserController = async (req, res, next) => {
   const { name, email, username, password } = req.body;
   const { id } = req.user;
 
@@ -124,7 +134,14 @@ const update = async (req, res, next) => {
   }
 };
 
-const deleteUser = async (req, res, next) => {
+/*
+ * @route   DELETE /api/users/
+ *
+ * @desc    Delete User
+ *
+ * @param   {string}  password
+ */
+const deleteUserController = async (req, res, next) => {
   const { password } = req.body;
   const { id } = req.user;
 
@@ -144,4 +161,10 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-export { registerUser, getUser, loginUser, update, deleteUser };
+export {
+  registerUserController,
+  getUserController,
+  loginUserController,
+  updateUserController,
+  deleteUserController,
+};
