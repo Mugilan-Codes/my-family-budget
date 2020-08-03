@@ -1,3 +1,5 @@
+import { addEntryService } from '../services/entries';
+
 /*
  * @route   POST /api/entries/
  *
@@ -22,10 +24,16 @@ const addEntryController = async (req, res, next) => {
     entry_date,
   });
 
-  console.log(!!is_income);
-  console.log(!!entry_date);
+  const addEntry = await addEntryService({
+    user_id,
+    category,
+    description,
+    is_income,
+    amount,
+    entry_date,
+  });
 
-  res.send({ user_id, category, description, is_income, amount, entry_date });
+  res.send(addEntry);
 };
 
 export { addEntryController };
