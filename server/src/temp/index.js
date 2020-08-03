@@ -1,5 +1,7 @@
 //! Temporary way to create table creation until docker is integrated
 
+//! Tables are not created and dropped smoothly
+
 import { Pool } from 'pg';
 
 import { db_url } from '../config';
