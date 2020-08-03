@@ -72,7 +72,7 @@ const getUserController = async (req, res, next) => {
 const loginUserController = async (req, res, next) => {
   const { email, username, password } = req.body;
   try {
-    const user = await retrieveUser({ email, username });
+    const user = await getUserService({ email, username });
 
     if (user.err_msg) {
       return res.status(401).json({ errors: [{ msg: user.err_msg }] });
