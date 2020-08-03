@@ -1,8 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
-// @babel/polyfill - regenerator-runtime/runtime error
-// import 'regenerator-runtime/runtime';
 
 const app = express();
 

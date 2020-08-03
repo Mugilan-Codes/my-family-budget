@@ -4,16 +4,18 @@ Keep track of all family budget
 
 ## TODO
 
-1. Dockerize the Project
-1. Use config and dotenv together to provide fallbacks and understanding
-1. Complete the routes
-1. Refactor Backend
+1. Make a clear README.md
+1. Docker
 
 ## Instruction
 
-- Postgres Setup
-  - [MacOS](https://www.robinwieruch.de/postgres-sql-macos-setup)
-  - [Windows](https://www.robinwieruch.de/postgres-sql-windows-setup)
+1. [Postgres Setup](https://www.robinwieruch.de/postgres-sql-macos-setup)
+1. Run Postgres in backgorund
+1. Change into server directory to run the backend
+
+   ```zsh
+      cd server
+   ```
 
 ## Packages Used
 
@@ -66,7 +68,13 @@ Keep track of all family budget
 - Starts the server with nodemon
 
 ```zsh
-   npm start
+   npm run dev
+```
+
+- Run the build version (uses for docker)
+
+```zsh
+   npm run build:start
 ```
 
 ## Resources
@@ -78,3 +86,5 @@ Keep track of all family budget
 - [Bulletproof node.js project architecture](https://softwareontheroad.com/ideal-nodejs-project-structure/)
 - [Using Docker & Docker Compose To Improve Your Full Stack Application Development](https://medium.com/@paigen11/using-docker-docker-compose-to-improve-your-full-stack-application-development-1e41280748f4)
 - [Error handling in Express using Middleware](https://codeforgeek.com/error-handling-in-express-using-middleware/)
+- [PostgreSQL Tutorial](https://www.postgresqltutorial.com/)
+- [Learn PostgreSQL](https://www.tutorialspoint.com/postgresql/index.htm)
