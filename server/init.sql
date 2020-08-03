@@ -15,10 +15,9 @@ CREATE TABLE IF NOT EXISTS entries (
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     category VARCHAR(25) NOT NULL,
     description TEXT,
-    -- type VARCHAR(10) CHECK(type IN('+', '-')) NOT NULL,
-    is_income BOOLEAN NOT NULL,
+    is_income BOOLEAN NOT NULL DEFAULT FALSE,
     amount money NOT NULL,
-    entry_date DATE NOT NULL, 
+    entry_date DATE NOT NULL DEFAULT CURRENT_DATE, 
     created_on TIMESTAMPTZ NOT NULL,
     updated_on TIMESTAMPTZ NOT NULL,
     PRIMARY KEY(id, user_id)
