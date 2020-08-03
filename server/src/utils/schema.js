@@ -24,4 +24,18 @@ const deleteSchema = Joi.object({
   password: Joi.string().required(),
 });
 
-export { loginSchema, registerSchema, updateSchema, deleteSchema };
+const addPostSchema = Joi.object({
+  category: Joi.string().lowercase().required(),
+  description: Joi.string().lowercase().default(null),
+  is_income: Joi.boolean(),
+  amount: Joi.number().min(1).required(),
+  entry_date: Joi.date().less('now'),
+});
+
+export {
+  loginSchema,
+  registerSchema,
+  updateSchema,
+  deleteSchema,
+  addPostSchema,
+};
