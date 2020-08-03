@@ -10,13 +10,13 @@ CREATE TABLE IF NOT EXISTS users (
 )
 
 CREATE TABLE IF NOT EXISTS entries (
-    id UUID,
+    id UUID DEFAULT gen_random_uuid(),
     user_id REFERENCES users(id) CASCADE DELETE,
-    category TEXT NOT NULL,
+    category VARCHAR(25) NOT NULL,
     description TEXT,
     type VARCHAR(10) CHECK(type IN('+', '-')) NOT NULL,
     amount money NOT NULL,
-    date TIMESTAMPTZ NOT NULL, 
+    entry_date DATE NOT NULL, 
     created_on TIMESTAMPTZ NOT NULL,
     updated_on TIMESTAMPTZ NOT NULL,
     PRIMARY KEY(id, user_id)
