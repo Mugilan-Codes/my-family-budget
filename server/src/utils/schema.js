@@ -27,9 +27,9 @@ const deleteSchema = Joi.object({
 const addPostSchema = Joi.object({
   category: Joi.string().lowercase().required(),
   description: Joi.string().lowercase().default(null),
-  is_income: Joi.boolean(),
+  is_income: Joi.boolean().default(false),
   amount: Joi.number().min(1).required(),
-  entry_date: Joi.date().less('now'),
+  entry_date: Joi.date().less('now').default(new Date()),
 });
 
 export {

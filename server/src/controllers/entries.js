@@ -15,25 +15,21 @@ const addEntryController = async (req, res, next) => {
   const { category, description, is_income, amount, entry_date } = req.body;
   const { id: user_id } = req.user;
 
-  console.log({
-    user_id,
-    category,
-    description,
-    is_income,
-    amount,
-    entry_date,
-  });
+  try {
+    const addEntry = await addEntryService({
+      user_id,
+      category,
+      description,
+      is_income,
+      amount,
+      entry_date,
+    });
 
-  const addEntry = await addEntryService({
-    user_id,
-    category,
-    description,
-    is_income,
-    amount,
-    entry_date,
-  });
-
-  res.send(addEntry);
+    res.send(addEntry);
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
 };
 
 export { addEntryController };

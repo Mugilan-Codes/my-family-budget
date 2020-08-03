@@ -10,13 +10,14 @@ CREATE TABLE IF NOT EXISTS users (
 )
 
 DROP TABLE IF EXISTS entries
+
 CREATE TABLE IF NOT EXISTS entries (
     id UUID,
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     category VARCHAR(25) NOT NULL,
     description TEXT,
-    is_income BOOLEAN NOT NULL DEFAULT FALSE,
-    amount money NOT NULL,
+    is_income BOOLEAN NOT NULL,
+    amount NUMERIC NOT NULL,
     entry_date DATE NOT NULL DEFAULT CURRENT_DATE, 
     created_on TIMESTAMPTZ NOT NULL,
     updated_on TIMESTAMPTZ NOT NULL,
