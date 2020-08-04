@@ -1,4 +1,4 @@
-import { addEntryService } from '../services/entries';
+import { addEntryService, getAllEntryService } from '../services/entries';
 
 /*
  * @route   POST /api/entries/
@@ -32,4 +32,22 @@ const addEntryController = async (req, res, next) => {
   }
 };
 
-export { addEntryController };
+/*
+ * @route   GET /api/entries/
+ *
+ * @desc    Get All Entries by User
+ */
+const getAllEntriesController = async (req, res, next) => {
+  const { id } = req.user;
+
+  try {
+    const getEntries = await getAllEntryService(id);
+
+    res.send(getEntries);
+  } catch (err) {
+    console.log(err.message);
+    next(err);
+  }
+};
+
+export { addEntryController, getAllEntriesController };

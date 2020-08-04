@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { addEntryToDb } from '../db/entries';
+import { addEntryToDb, getAllEntriesByUser } from '../db/entries';
 
 const addEntryService = async ({
   user_id,
@@ -33,4 +33,15 @@ const addEntryService = async ({
   }
 };
 
-export { addEntryService };
+const getAllEntryService = async (id) => {
+  try {
+    const result = await getAllEntriesByUser(id);
+
+    return result;
+  } catch (err) {
+    console.log(err.message);
+    return new Error(err);
+  }
+};
+
+export { addEntryService, getAllEntryService };
