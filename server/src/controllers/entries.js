@@ -2,8 +2,8 @@ import { addEntryService, getAllEntryService } from '../services/entries';
 
 /*
  * @route   POST /api/entries/
- *
  * @desc    Add Entry
+ * @access  Private
  *
  * @param   {string}   category
  * @param   {string}   [description=null]
@@ -34,8 +34,8 @@ const addEntryController = async (req, res, next) => {
 
 /*
  * @route   GET /api/entries/
- *
  * @desc    Get All Entries by User
+ * @access  Private
  */
 const getAllEntriesController = async (req, res, next) => {
   const { id } = req.user;

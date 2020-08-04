@@ -9,8 +9,8 @@ import { comparePassword } from '../utils/crypt';
 
 /*
  * @route   POST /api/users/
- *
  * @desc    Register User
+ * @access  Public
  *
  * @param   {string}  name
  * @param   {string}  email
@@ -41,9 +41,8 @@ const registerUserController = async (req, res, next) => {
 
 /*
  * @route   GET /api/users/
- * @access  private
- *
  * @desc    Get Current User by Token
+ * @access  Private
  */
 const getUserController = async (req, res, next) => {
   const { id } = req.user;
@@ -63,8 +62,8 @@ const getUserController = async (req, res, next) => {
 
 /*
  * @route   POST /api/auth/
- *
  * @desc    Authenticate User
+ * @access  Public
  *
  * @param   {string}  [username or email]
  * @param   {string}  password
@@ -100,7 +99,7 @@ const loginUserController = async (req, res, next) => {
 
 /*
  * @route   PUT /api/users/
- *
+ * @access  Private
  * @desc    Update User ( Atleast one param must be present )
  *
  * @param   {string}  [name=null]
@@ -136,8 +135,8 @@ const updateUserController = async (req, res, next) => {
 
 /*
  * @route   DELETE /api/users/
- *
  * @desc    Delete User
+ * @access  Private
  *
  * @param   {string}  password
  */
