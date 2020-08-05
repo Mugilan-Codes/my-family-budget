@@ -46,4 +46,16 @@ const getAllEntriesByUser = async (id) => {
   return rows;
 };
 
-export { addEntryToDb, getAllEntriesByUser };
+const getOneEntryByUser = async (id, user_id) => {
+  const query = `
+    SELECT *
+    FROM entries
+    WHERE id = $1 AND user_id = $2
+  `;
+
+  const { rows } = await db.query(query, [id, user_id]);
+
+  return rows[0];
+};
+
+export { addEntryToDb, getAllEntriesByUser, getOneEntryByUser };

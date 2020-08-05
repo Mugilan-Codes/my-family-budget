@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
   try {
     const decoded = verifyToken(token);
 
-    console.log({ decoded });
+    // console.log({ decoded });
 
     req.user = decoded.user;
 

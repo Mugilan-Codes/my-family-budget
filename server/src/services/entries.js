@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
-import { addEntryToDb, getAllEntriesByUser } from '../db/entries';
+import {
+  addEntryToDb,
+  getAllEntriesByUser,
+  getOneEntryByUser,
+} from '../db/entries';
 
 const addEntryService = async ({
   user_id,
@@ -44,9 +48,12 @@ const getAllEntryService = async (id) => {
   }
 };
 
+//! Return error for invalid id
 const getOneEntryService = async ({ id, user_id }) => {
   try {
-    return { id, user_id };
+    const result = await getOneEntryByUser(id, user_id);
+
+    return result;
   } catch (err) {
     console.log(err.message);
     return new Error(err);
