@@ -44,4 +44,13 @@ const getAllEntryService = async (id) => {
   }
 };
 
-export { addEntryService, getAllEntryService };
+const getOneEntryService = async ({ id, user_id }) => {
+  try {
+    return { id, user_id };
+  } catch (err) {
+    console.log(err.message);
+    return new Error(err);
+  }
+};
+
+export { addEntryService, getAllEntryService, getOneEntryService };
