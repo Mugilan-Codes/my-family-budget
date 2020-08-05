@@ -33,7 +33,8 @@ const registerUserService = async ({ name, email, password, username }) => {
 
     return await User.createUser(newUser);
   } catch (err) {
-    console.log(err.message);
+    console.log('registerUserService');
+    console.error(err.message);
     return new Error(err);
   }
 };
@@ -54,7 +55,8 @@ const getUserService = async ({ id, email, username } = {}) => {
     }
     return user;
   } catch (err) {
-    console.log(err.message);
+    console.log('getUserService');
+    console.error(err.message);
     return new Error(err);
   }
 };
@@ -104,7 +106,8 @@ const updateUserService = async ({ id, name, email, username, password }) => {
 
     return updated;
   } catch (err) {
-    console.log(err.message);
+    console.log('updateUserService');
+    console.error(err.message);
     return new Error(err);
   }
 };
@@ -122,7 +125,8 @@ const deleteUserService = async (id, password) => {
 
     return deleted;
   } catch (err) {
-    console.log(err.message);
+    console.log('deleteUserService');
+    console.error(err.message);
     return new Error(err);
   }
 };

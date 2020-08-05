@@ -34,7 +34,8 @@ const registerUserController = async (req, res, next) => {
 
     res.json({ token });
   } catch (err) {
-    console.log(err.message);
+    console.log('registerUserController');
+    console.error(err.message);
     next(err);
   }
 };
@@ -55,7 +56,8 @@ const getUserController = async (req, res, next) => {
 
     res.json(user);
   } catch (err) {
-    console.log(err.message);
+    console.log('getUserController');
+    console.error(err.message);
     next(err);
   }
 };
@@ -92,7 +94,8 @@ const loginUserController = async (req, res, next) => {
 
     res.json({ token });
   } catch (err) {
-    console.log(err.message);
+    console.log('loginUserController');
+    console.error(err.message);
     next(err);
   }
 };
@@ -128,7 +131,8 @@ const updateUserController = async (req, res, next) => {
 
     res.send('User Updated');
   } catch (err) {
-    console.log(err.message);
+    console.log('updateUserController');
+    console.error(err.message);
     next(err);
   }
 };
@@ -155,7 +159,8 @@ const deleteUserController = async (req, res, next) => {
 
     res.send('User Deleted');
   } catch (err) {
-    console.log(err.message);
+    console.log('deleteUserController');
+    console.error(err.message);
     next(err);
   }
 };

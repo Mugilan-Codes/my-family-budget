@@ -32,7 +32,8 @@ const addEntryService = async ({
 
     return result;
   } catch (err) {
-    console.log(err.message);
+    console.log('addEntryService');
+    console.error(err.message);
     return new Error(err);
   }
 };
@@ -43,7 +44,8 @@ const getAllEntryService = async (id) => {
 
     return result;
   } catch (err) {
-    console.log(err.message);
+    console.log('getAllEntryService');
+    console.error(err.message);
     return new Error(err);
   }
 };
@@ -53,9 +55,17 @@ const getOneEntryService = async ({ id, user_id }) => {
   try {
     const result = await getOneEntryByUser(id, user_id);
 
+    // Check for ObjectId format and post
+    // if (!req.params.id.match(/^[0-9a-fA-F]{24}$/) || !post) {
+    //   return res.status(404).json({ msg: 'Post not found' });
+    // }
+
     return result;
   } catch (err) {
-    console.log(err.message);
+    console.log('getOneEntryService');
+    console.error(err.message);
+    // if (err.kind == 'ObjectId')
+    //   return res.status(404).json({ msg: 'Post not found' });
     return new Error(err);
   }
 };

@@ -31,7 +31,8 @@ const addEntryController = async (req, res, next) => {
 
     res.send(addEntry);
   } catch (err) {
-    console.log(err.message);
+    console.log('addEntryController');
+    console.error(err.message);
     next(err);
   }
 };
@@ -49,7 +50,8 @@ const getAllEntriesController = async (req, res, next) => {
 
     res.send(getEntries);
   } catch (err) {
-    console.log(err.message);
+    console.log('getAllEntriesController');
+    console.error(err.message);
     next(err);
   }
 };
@@ -68,7 +70,8 @@ const getEntryByIdController = async (req, res, next) => {
 
     res.send(getEntry);
   } catch (err) {
-    console.log(err.message);
+    console.log('getEntryByIdController');
+    console.error(err.message);
     next(err);
   }
 };
