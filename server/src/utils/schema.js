@@ -32,10 +32,16 @@ const addPostSchema = Joi.object({
   entry_date: Joi.date().less('now').default(new Date()),
 });
 
+// Test whether the parameter is a valid uuid
+const validIdSchema = Joi.object({
+  id: Joi.string().guid({ version: ['uuidv4'] }),
+});
+
 export {
   loginSchema,
   registerSchema,
   updateSchema,
   deleteSchema,
   addPostSchema,
+  validIdSchema,
 };

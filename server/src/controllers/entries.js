@@ -3,6 +3,7 @@ import {
   getAllEntryService,
   getOneEntryService,
 } from '../services/entries';
+import { errors } from 'celebrate';
 
 /*
  * @route   POST /api/entries/
@@ -67,6 +68,10 @@ const getEntryByIdController = async (req, res, next) => {
 
   try {
     const getEntry = await getOneEntryService({ id, user_id });
+
+    if (getEntry.err_msg) {
+      return res.status(404).json({ errors: [{ msg: getEntry.err_msg }] });
+    }
 
     res.send(getEntry);
   } catch (err) {
