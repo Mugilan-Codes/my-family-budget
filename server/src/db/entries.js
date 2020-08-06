@@ -58,4 +58,22 @@ const getOneEntryByUser = async (id, user_id) => {
   return rows[0];
 };
 
-export { addEntryToDb, getAllEntriesByUser, getOneEntryByUser };
+const deleteOneEntryByUser = async (id, user_id) => {
+  const query = `
+    DELETE
+    FROM entries
+    WHERE id = $1 AND user_id = $2
+    RETURNING *
+  `;
+
+  const { rows } = await db.query(query, [id, user_id]);
+
+  return rows[0];
+};
+
+export {
+  addEntryToDb,
+  getAllEntriesByUser,
+  getOneEntryByUser,
+  deleteOneEntryByUser,
+};

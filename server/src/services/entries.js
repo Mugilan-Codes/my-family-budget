@@ -3,6 +3,7 @@ import {
   addEntryToDb,
   getAllEntriesByUser,
   getOneEntryByUser,
+  deleteOneEntryByUser,
 } from '../db/entries';
 
 const addEntryService = async ({
@@ -66,4 +67,25 @@ const getOneEntryService = async ({ id, user_id }) => {
   }
 };
 
-export { addEntryService, getAllEntryService, getOneEntryService };
+const deleteOneEntryService = async ({ id, user_id }) => {
+  try {
+    const result = await deleteOneEntryByUser(id, user_id);
+
+    if (!result) {
+      return { err_msg: 'Entry Not Found' };
+    }
+
+    return result;
+  } catch (err) {
+    console.log('deleteOneEntryService');
+    console.error(err.message);
+    return new Error(err);
+  }
+};
+
+export {
+  addEntryService,
+  getAllEntryService,
+  getOneEntryService,
+  deleteOneEntryService,
+};

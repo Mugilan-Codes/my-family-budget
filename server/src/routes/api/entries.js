@@ -6,6 +6,7 @@ import {
   addEntryController,
   getAllEntriesController,
   getEntryByIdController,
+  deleteEntryByIdController,
 } from '../../controllers/entries';
 import { addPostSchema, validIdSchema } from '../../utils/schema';
 
@@ -18,6 +19,11 @@ router
     '/:id',
     [auth, celebrate({ params: validIdSchema })],
     getEntryByIdController
+  )
+  .delete(
+    '/:id',
+    [auth, celebrate({ params: validIdSchema })],
+    deleteEntryByIdController
   );
 
 export default router;

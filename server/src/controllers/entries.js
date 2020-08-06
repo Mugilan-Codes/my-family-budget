@@ -2,6 +2,7 @@ import {
   addEntryService,
   getAllEntryService,
   getOneEntryService,
+  deleteOneEntryService,
 } from '../services/entries';
 import { errors } from 'celebrate';
 
@@ -81,4 +82,35 @@ const getEntryByIdController = async (req, res, next) => {
   }
 };
 
-export { addEntryController, getAllEntriesController, getEntryByIdController };
+/*
+ * @route   DELETE /api/entries/:id
+ * @desc    Delete a single Entry
+ * @access  Private
+ */
+const deleteEntryByIdController = async (req, res, next) => {
+  const { id } = req.params;
+  const { id: user_id } = req.user;
+
+  try {
+    const deleteEntry = await deleteOneEntryService({ id, user_id });
+
+    if (deleteEntry.err_msg) {
+      return res.status(404).json({ errors: [{ msg: deleteEntry.err_msg }] });
+    }
+
+    console.log({ deleteEntry });
+
+    res.send('Entry Deleted');
+  } catch (err) {
+    console.log('deleteEntryByIdController');
+    console.error(err.message);
+    next(err);
+  }
+};
+
+export {
+  addEntryController,
+  getAllEntriesController,
+  getEntryByIdController,
+  deleteEntryByIdController,
+};
